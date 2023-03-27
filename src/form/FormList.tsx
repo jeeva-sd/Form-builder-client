@@ -14,6 +14,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Snackbar, Stack } from '@mui/material';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import Loader from '../widgets/Loader';
+import { config } from '../config/config';
 
 export default function FormList() {
     const navigate = useNavigate();
@@ -50,7 +51,7 @@ export default function FormList() {
 
     useEffect(() => {
         setIsRequesting(true)
-        axios.get('http://localhost:4000/form')
+        axios.get(`${config.apiUrl}/form`)
             .then(response => { setFormList(response.data); setIsRequesting(false) })
             .catch(error => { console.log(error); setIsRequesting(false) });
 
@@ -61,7 +62,7 @@ export default function FormList() {
         const updatedList = formList.filter((form: any) => form.formId === formId ? false : true);
         setFormList(updatedList);
 
-        axios.delete(`http://localhost:4000/form/${formId}`)
+        axios.delete(`${config.apiUrl}/form/${formId}`)
             .then((_response) => {
                 setSnakBar(true);
             })
@@ -118,7 +119,7 @@ export default function FormList() {
             })}
 
             {isRequesting && <Loader />}
-            {formList.length === 0 && <span style={{ display: 'flex', alignItems: 'center' }}><AnnouncementIcon sx={{ marginRight: 1 }} /> No Form's Found</span>}
+            {formList.length === 0 && <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}><AnnouncementIcon sx={{ marginRight: 1 }} /> No Form's Found</span>}
 
             <Snackbar
                 open={snakBar}
@@ -128,6 +129,5 @@ export default function FormList() {
                 message="Form Deleted Successfully"
             />
         </Stack>
-
     );
 }

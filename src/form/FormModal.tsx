@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { v4 as uuidv4 } from 'uuid';
 import { fieldDataTypes } from './types';
+import AddRemoveInputFields from './AddOptions';
 
 const schema = z.object({
     name: z.string().refine((name) => /^[a-z]/.test(name), {
@@ -52,6 +53,7 @@ const FormContent = ({ show, onHide, data, onAdd }) => {
         label: "",
         required: false,
         type: { label: "", value: "" },
+        options: []
     });
 
     React.useEffect(() => { if (data) setModalData(data) }, [data])
@@ -59,12 +61,12 @@ const FormContent = ({ show, onHide, data, onAdd }) => {
 
     const handleChange = (key: string, value: any) => {
         if (key === "type") {
-            console.log(key, value)
             setModalData({
                 ...modalData,
                 type: { label: value, value },
             });
-        } else {
+        }
+        else {
             setModalData({
                 ...modalData,
                 [key]: value,
@@ -72,7 +74,7 @@ const FormContent = ({ show, onHide, data, onAdd }) => {
         }
     };
 
-    const { name, type, label, required } = modalData;
+    const { name, type, label, required, options } = modalData;
     const { fieldErrors } = errors;
 
     return (
@@ -97,7 +99,7 @@ const FormContent = ({ show, onHide, data, onAdd }) => {
 
                                 <TextField
                                     {...register("name", { required: true })}
-                                    error={!!errors.label}
+                                    error={!!errors?.label}
                                     value={name}
                                     label="Field Name"
                                     required={true}
@@ -123,11 +125,13 @@ const FormContent = ({ show, onHide, data, onAdd }) => {
 
                                 <TextField
                                     {...register('label', { required: true })}
-                                    error={!!errors.label}
+                                    error={!!errors?.label}
                                     value={label} label='Label'
                                     required={true}
                                     onChange={(e: any) => handleChange('label', e.target.value)} />
-                                {errors.label && <span style={{ color: 'red' }}>This field is required</span>}
+                                {errors?.label && <span style={{ color: 'red' }}>This field is required</span>}
+
+                                {type?.label === 'SELECT' && <AddRemoveInputFields handleChange={handleChange} options={options} />}
 
                                 <FormControlLabel
                                     onChange={(e: any) => handleChange('required', e.target.checked)}

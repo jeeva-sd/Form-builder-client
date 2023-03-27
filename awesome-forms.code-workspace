@@ -6,6 +6,12 @@
     ],
     "settings": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "[typescriptreact]": {
+            "editor.defaultFormatter": "vscode.typescript-language-features"
+        },
+        "[css]": {
+            "editor.defaultFormatter": "vscode.css-language-features"
+        }
     }
 }

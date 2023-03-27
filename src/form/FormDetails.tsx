@@ -18,6 +18,7 @@ import { fieldDataTypes } from './types';
 import Skeleton from '@mui/material/Skeleton';
 import { Container } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
+import { config } from '../config/config';
 
 const FormDetails = () => {
     const { id } = useParams();
@@ -53,7 +54,7 @@ const FormDetails = () => {
 
     useEffect(() => {
         setIsRequesting(true)
-        axios.get(`http://localhost:4000/form/${id}`)
+        axios.get(`${config.apiUrl}/form/${id}`)
             .then(response => {
                 setIsRequesting(false)
                 if (typeof response.data === 'string') setFields(formObj)
@@ -87,7 +88,7 @@ const FormDetails = () => {
     };
 
     const handleAdd = (data: any) => {
-        axios.post(`http://localhost:4000/form`, data)
+        axios.post(`${config.apiUrl}/form`, data)
             .then(response => {
                 if (typeof response.data !== 'string') setSnakBar(true)
             })
@@ -98,7 +99,7 @@ const FormDetails = () => {
     }
 
     const handleEdit = (data: any) => {
-        axios.patch(`http://localhost:4000/form/${data.formId}`, data)
+        axios.patch(`${config.apiUrl}/form/${data.formId}`, data)
             .then(response => {
                 if (typeof response.data !== 'string') setSnakBar(true)
             })
@@ -120,8 +121,6 @@ const FormDetails = () => {
             }, 3000)
         }
     }, [snakBar]);
-
-    useEffect(() => console.log(showModal), [showModal])
 
     return (
         <>

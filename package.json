@@ -52,6 +52,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.14",
     "@types/jest": "^27.0.1",
@@ -59,7 +60,6 @@
     "@types/react-dom": "^17.0.9",
     "@types/systemjs": "^6.1.1",
     "@types/webpack-env": "^1.16.2",
-    "awesome-form-ui": "file:../../Downloads/awesome-form-ui-1.0.0.tgz",
     "axios": "^1.3.4",
     "install": "^0.13.0",
     "moment": "^2.29.4",
