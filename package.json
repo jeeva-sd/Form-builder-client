@@ -1,7 +1,7 @@
 {
   "name": "@form-inc/awsome-form-builder",
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --mode development",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
