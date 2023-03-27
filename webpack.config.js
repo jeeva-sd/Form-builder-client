@@ -7,6 +7,11 @@ module.exports = (webpackConfigEnv, argv) => {
     projectName: "awsome-form-builder",
     webpackConfigEnv,
     argv,
+     entry: "./src/index.ts",
+     output: {
+        path: "./dist",
+        filename: "bundle.js",
+      },
   });
 
   return merge(defaultConfig, {
